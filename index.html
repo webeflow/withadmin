@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ammar Photography & Films — Royal Wedding Photography</title>
+  <meta name="description" content="Ammar Photography & Films — Premium wedding photography and cinematic films. Capturing royal moments and timeless marriages with elite artistry.">
+  <meta property="og:title" content="Ammar Photography & Films">
+  <meta property="og:description" content="Capturing Royal Moments & Timeless Marriages">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: {
+              50: '#FFFDF0', 100: '#FFF9D6', 200: '#FFF3AD', 300: '#FFEB80',
+              400: '#FFE04D', 500: '#FFD700', 600: '#D4AF37', 700: '#B8960F',
+              800: '#8C7200', 900: '#604D00',
+            },
+            cream: { 50: '#FEFDFB', 100: '#FDF8F0', 200: '#FAF0E0', 300: '#F5E6CC' },
+            luxury: { dark: '#0C0A08', charcoal: '#1A1714', brown: '#2D2518' },
+          },
+          fontFamily: {
+            playfair: ['"Playfair Display"', 'serif'],
+            poppins: ['Poppins', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Poppins', sans-serif; }
+    section[id] { scroll-margin-top: 80px; }
+
+    /* Preloader */
+    #preloader { transition: opacity 0.6s ease; }
+    @keyframes loadingBar {
+      0% { width: 0%; }
+      40% { width: 60%; }
+      80% { width: 85%; }
+      100% { width: 100%; }
+    }
+    .animate-loading-bar { animation: loadingBar 1.8s ease forwards; }
+
+    /* Hero gold line */
+    .hero-line {
+      width: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+      animation: expandLine 1.5s ease forwards 0.8s;
+    }
+    @keyframes expandLine { to { width: 180px; } }
+
+    /* Hero text entrance */
+    .hero-fade-up {
+      opacity: 0; transform: translateY(30px);
+      animation: heroFadeUp 1s ease forwards;
+    }
+    .hero-fade-up:nth-child(1) { animation-delay: 0.3s; }
+    .hero-fade-up:nth-child(2) { animation-delay: 0.6s; }
+    .hero-fade-up:nth-child(3) { animation-delay: 0.9s; }
+    .hero-fade-up:nth-child(4) { animation-delay: 1.2s; }
+    @keyframes heroFadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Scroll-triggered fade */
+    .fade-up {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* Gold shimmer button */
+    .gold-btn {
+      background: linear-gradient(135deg, #FFD700, #D4AF37, #B8860B, #D4AF37, #FFD700);
+      background-size: 300% 300%;
+      animation: shimmer 4s ease infinite;
+      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .gold-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(212, 175, 55, 0.5);
+    }
+    @keyframes shimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Gold outline button */
+    .gold-outline-btn {
+      border: 2px solid #D4AF37; color: #D4AF37;
+      transition: all 0.3s ease;
+    }
+    .gold-outline-btn:hover {
+      background: #D4AF37; color: #0C0A08;
+      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+    }
+
+    /* Gallery items */
+    .gallery-item {
+      position: relative; overflow: hidden; border-radius: 0.75rem;
+      cursor: pointer; transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .gallery-item::after {
+      content: ''; position: absolute; inset: 0;
+      border: 2px solid transparent; border-radius: 0.75rem;
+      transition: border-color 0.4s ease; pointer-events: none;
+    }
+    .gallery-item:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(212,175,55,0.15); }
+    .gallery-item:hover::after { border-color: #D4AF37; }
+    .gallery-item img { transition: transform 0.6s ease; }
+    .gallery-item:hover img { transform: scale(1.08); }
+
+    /* Lightbox */
+    .lightbox-overlay {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    /* Floating buttons */
+    .float-btn {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .float-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 30px rgba(0,0,0,0.25);
+    }
+
+    /* Navbar transition */
+    #navbar { transition: background-color 0.4s ease, box-shadow 0.4s ease; }
+    .nav-link { transition: color 0.3s ease; position: relative; }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -4px; left: 0;
+      width: 0; height: 2px; background: #D4AF37;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+    /* Mobile menu */
+    #mobileMenu {
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+    #mobileMenu.open { opacity: 1; visibility: visible; }
+    #mobileMenu:not(.open) { opacity: 0; visibility: hidden; }
+
+    /* Owner image frame */
+    .owner-frame {
+      position: relative;
+    }
+    .owner-frame::before {
+      content: ''; position: absolute; inset: -8px;
+      border: 2px solid #D4AF37; border-radius: 1rem;
+      z-index: 0; opacity: 0.6;
+    }
+    .owner-frame::after {
+      content: ''; position: absolute;
+      top: -16px; right: -16px; width: 80px; height: 80px;
+      border-top: 3px solid #FFD700; border-right: 3px solid #FFD700;
+      border-radius: 0 1rem 0 0; z-index: 0;
+    }
+
+    /* Scroll indicator */
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0) translateX(-50%); }
+      50% { transform: translateY(10px) translateX(-50%); }
+    }
+    .scroll-indicator { animation: bounce 2s ease infinite; }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #FDF8F0; }
+    ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #B8960F; }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+
+<body class="bg-cream-100 text-luxury-charcoal font-poppins">
+
+  <!-- ============ PRELOADER ============ -->
+  <div id="preloader" class="fixed inset-0 z-[100] bg-cream-100 flex items-center justify-center">
+    <div class="text-center">
+      <p class="font-playfair text-2xl md:text-3xl text-gold-600 mb-6 tracking-wide">Ammar Photography</p>
+      <div class="w-56 h-0.5 bg-gold-100 rounded-full overflow-hidden mx-auto">
+        <div class="h-full bg-gradient-to-r from-gold-600 to-gold-500 rounded-full animate-loading-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ NAVBAR ============ -->
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-transparent">
+    <div class="max-w-7xl mx-auto px-5 md:px-8 flex items-center justify-between h-20">
+      <!-- Brand -->
+      <a href="#home" class="flex items-center gap-2 z-10">
+        <iconify-icon icon="lucide:aperture" width="28" height="28" class="text-gold-500 navbar-brand-icon"></iconify-icon>
+        <span class="font-playfair text-lg md:text-xl font-semibold text-white navbar-brand-text tracking-wide">
+          Ammar photography <span class="text-gold-500">&</span> Films
+        </span>
+      </a>
+      <!-- Desktop Links -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#home" class="nav-link text-white text-sm font-medium tracking-wider uppercase" data-section="home">Home</a>
+        <a href="#about" class="nav-link text-white text-sm font-medium tracking-wider uppercase" data-section="about">About Owner</a>
+        <a href="#gallery" class="nav-link text-white text-sm font-medium tracking-wider uppercase" data-section="gallery">Gallery</a>
+        <a href="#contact" class="nav-link text-white text-sm font-medium tracking-wider uppercase" data-section="contact">Contact Us</a>
+      </div>
+      <!-- Mobile Hamburger -->
+      <button id="menuToggle" class="md:hidden z-10 p-2 text-white navbar-hamburger" aria-label="Toggle menu">
+        <iconify-icon icon="lucide:menu" width="26" height="26" id="menuIconOpen"></iconify-icon>
+        <iconify-icon icon="lucide:x" width="26" height="26" id="menuIconClose" class="hidden"></iconify-icon>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============ MOBILE MENU ============ -->
+  <div id="mobileMenu" class="fixed inset-0 z-40 bg-luxury-dark/95 flex flex-col items-center justify-center gap-8">
+    <a href="#home" class="mobile-nav-link font-playfair text-2xl text-gold-500 hover:text-gold-400 transition-colors" onclick="closeMobileMenu()">Home</a>
+    <a href="#about" class="mobile-nav-link font-playfair text-2xl text-gold-500 hover:text-gold-400 transition-colors" onclick="closeMobileMenu()">About Owner</a>
+    <a href="#gallery" class="mobile-nav-link font-playfair text-2xl text-gold-500 hover:text-gold-400 transition-colors" onclick="closeMobileMenu()">Gallery</a>
+    <a href="#contact" class="mobile-nav-link font-playfair text-2xl text-gold-500 hover:text-gold-400 transition-colors" onclick="closeMobileMenu()">Contact Us</a>
+    <div class="mt-6 flex items-center gap-4">
+      <a href="tel:03066803289" class="w-12 h-12 rounded-full border border-gold-600 flex items-center justify-center text-gold-500 hover:bg-gold-600 hover:text-luxury-dark transition-all" aria-label="Call us">
+        <iconify-icon icon="lucide:phone" width="20" height="20"></iconify-icon>
+      </a>
+      <a href="https://wa.me/923066803289" target="_blank" class="w-12 h-12 rounded-full border border-green-500 flex items-center justify-center text-green-500 hover:bg-green-500 hover:text-white transition-all" aria-label="WhatsApp">
+        <iconify-icon icon="mdi:whatsapp" width="22" height="22"></iconify-icon>
+      </a>
+    </div>
+  </div>
+
+  <!-- ============ HERO SECTION ============ -->
+  <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div id="heroBg" class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700" style="background-image: url('b.png');"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/65 via-black/50 to-black/75"></div>
+    <!-- Decorative corner accents -->
+    <div class="absolute top-24 left-6 md:left-12 w-16 h-16 border-t-2 border-l-2 border-gold-600/40 hidden md:block"></div>
+    <div class="absolute top-24 right-6 md:right-12 w-16 h-16 border-t-2 border-r-2 border-gold-600/40 hidden md:block"></div>
+    <div class="absolute bottom-12 left-6 md:left-12 w-16 h-16 border-b-2 border-l-2 border-gold-600/40 hidden md:block"></div>
+    <div class="absolute bottom-12 right-6 md:right-12 w-16 h-16 border-b-2 border-r-2 border-gold-600/40 hidden md:block"></div>
+
+    <div class="relative z-10 text-center px-6 max-w-4xl">
+      <h1 id="heroTitle" class="hero-fade-up font-playfair text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white mb-6 leading-[1.1]">
+        Ammar photography<br class="hidden sm:block"><span class="text-gold-500">&</span> Films
+      </h1>
+      <div class="hero-line mx-auto mb-6"></div>
+      <p id="heroSubtitle" class="hero-fade-up font-poppins text-base sm:text-lg md:text-xl text-white/80 mb-10 tracking-wide font-light">
+        Capturing Royal Moments & Timeless Marriages
+      </p>
+      <div class="hero-fade-up">
+        <a href="#contact" class="gold-btn inline-block px-10 py-4 text-luxury-dark font-semibold rounded-lg tracking-wider text-sm uppercase">
+          Book Your Royal Experience
+        </a>
+      </div>
+    </div>
+
+    <div class="scroll-indicator absolute bottom-8 left-1/2 text-gold-500/70">
+      <iconify-icon icon="lucide:chevron-down" width="28" height="28"></iconify-icon>
+    </div>
+  </section>
+
+  <!-- ============ DIVIDER ============ -->
+  <div class="flex items-center justify-center gap-3 py-10 bg-cream-100">
+    <span class="block w-10 md:w-16 h-px bg-gradient-to-r from-transparent to-gold-600"></span>
+    <span class="block w-2 h-2 bg-gold-600 rotate-45"></span>
+    <span class="block w-10 md:w-16 h-px bg-gradient-to-l from-transparent to-gold-600"></span>
+  </div>
+
+  <!-- ============ ABOUT SECTION ============ -->
+  <section id="about" class="py-16 md:py-24 bg-cream-100">
+    <div class="max-w-7xl mx-auto px-5 md:px-8">
+      <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+        <!-- Owner Image -->
+        <div class="flex justify-center fade-up">
+          <div class="owner-frame">
+            <img id="ownerImage" src="owner.png" alt="Ammar — Elite Wedding Photographer"
+                 class="relative z-[1] w-72 sm:w-80 md:w-96 h-auto rounded-xl object-cover shadow-2xl"
+                 onerror="this.src='https://picsum.photos/seed/photographer/500/600'">
+          </div>
+        </div>
+        <!-- Text Content -->
+        <div class="fade-up" style="transition-delay: 0.2s;">
+          <p class="text-gold-600 text-sm font-semibold tracking-[0.2em] uppercase mb-3">The Visionary</p>
+          <h2 id="aboutHeading" class="font-playfair text-3xl sm:text-4xl md:text-5xl text-luxury-dark mb-6 leading-tight">
+            Meet The Artist Behind The Lens
+          </h2>
+          <div class="w-16 h-0.5 bg-gold-600 mb-6"></div>
+          <p id="aboutDescription" class="text-luxury-charcoal/80 leading-relaxed mb-6 text-[15px]">
+            With over a decade of mastery in the art of wedding photography and cinematography, the creative force behind Ammar Photography & Films has established an unrivaled legacy of excellence. Known for capturing the grandeur, emotion, and sacred beauty of royal weddings, every frame is a masterpiece — meticulously composed, elegantly lit, and timeless in its appeal. Our philosophy is rooted in discretion, artistry, and an unwavering commitment to preserving your most treasured moments with absolute perfection.
+          </p>
+          <p id="aboutTagline" class="font-playfair text-xl md:text-2xl text-gold-700 italic mb-8">
+            "Where Every Frame Tells a Royal Story"
+          </p>
+          <!-- Highlights -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="aboutHighlights">
+            <div class="flex items-center gap-3">
+              <iconify-icon icon="lucide:crown" width="18" height="18" class="text-gold-600 flex-shrink-0"></iconify-icon>
+              <span class="text-sm text-luxury-charcoal/70">15+ Years of Elite Experience</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <iconify-icon icon="lucide:film" width="18" height="18" class="text-gold-600 flex-shrink-0"></iconify-icon>
+              <span class="text-sm text-luxury-charcoal/70">Cinematic 4K Wedding Films</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <iconify-icon icon="lucide:shield-check" width="18" height="18" class="text-gold-600 flex-shrink-0"></iconify-icon>
+              <span class="text-sm text-luxury-charcoal/70">Discreet & Professional Coverage</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <iconify-icon icon="lucide:heart-handshake" width="18" height="18" class="text-gold-600 flex-shrink-0"></iconify-icon>
+              <span class="text-sm text-luxury-charcoal/70">Trusted by Royal Families</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DIVIDER ============ -->
+  <div class="flex items-center justify-center gap-3 py-10 bg-cream-50">
+    <span class="block w-10 md:w-16 h-px bg-gradient-to-r from-transparent to-gold-600"></span>
+    <span class="block w-2 h-2 bg-gold-600 rotate-45"></span>
+    <span class="block w-10 md:w-16 h-px bg-gradient-to-l from-transparent to-gold-600"></span>
+  </div>
+
+  <!-- ============ GALLERY SECTION ============ -->
+  <section id="gallery" class="py-16 md:py-24 bg-cream-50">
+    <div class="max-w-7xl mx-auto px-5 md:px-8">
+      <div class="text-center mb-12 md:mb-16 fade-up">
+        <p class="text-gold-600 text-sm font-semibold tracking-[0.2em] uppercase mb-3">Our Work</p>
+        <h2 class="font-playfair text-3xl sm:text-4xl md:text-5xl text-luxury-dark mb-4">Royal Wedding Gallery</h2>
+        <div class="w-16 h-0.5 bg-gold-600 mx-auto mb-4"></div>
+        <p class="text-luxury-charcoal/60 max-w-xl mx-auto text-sm md:text-base">A curated collection of our finest moments — each frame a testament to grandeur, love, and timeless artistry.</p>
+      </div>
+      <div id="galleryGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
+        <!-- Gallery items rendered by JS -->
+      </div>
+      <div id="galleryEmpty" class="hidden text-center py-16">
+        <iconify-icon icon="lucide:image-off" width="48" height="48" class="text-gold-300 mb-4"></iconify-icon>
+        <p class="text-luxury-charcoal/50">Gallery images will appear here once added via the admin panel.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT SECTION ============ -->
+  <section id="contact" class="relative py-20 md:py-28 bg-luxury-dark overflow-hidden">
+    <!-- Subtle pattern -->
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, #D4AF37 1px, transparent 0); background-size: 40px 40px;"></div>
+    <!-- Gold accent lines -->
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-600/40 to-transparent"></div>
+    <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-600/40 to-transparent"></div>
+
+    <div class="relative z-10 max-w-3xl mx-auto px-6 text-center fade-up">
+      <p class="text-gold-600 text-sm font-semibold tracking-[0.2em] uppercase mb-3">Get In Touch</p>
+      <h2 class="font-playfair text-3xl sm:text-4xl md:text-5xl text-white mb-4">Let's Create Your Royal Story</h2>
+      <div class="w-16 h-0.5 bg-gold-600 mx-auto mb-6"></div>
+      <p class="text-white/60 mb-10 text-sm md:text-base max-w-lg mx-auto">
+        Every grand celebration deserves an artist who understands its significance. Reach out to us and let's begin crafting your timeless legacy.
+      </p>
+
+      <!-- Phone Number -->
+      <a href="tel:03066803289" class="inline-block mb-10 group" aria-label="Call 0306 6803289">
+        <p class="text-white/50 text-xs uppercase tracking-[0.2em] mb-2">Call Us Directly</p>
+        <p class="font-playfair text-3xl sm:text-4xl md:text-5xl text-gold-500 group-hover:text-gold-400 transition-colors tracking-wide">
+          0306 6803289
+        </p>
+      </a>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="https://wa.me/923066803289" target="_blank" rel="noopener"
+           class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#25D366] text-white font-semibold rounded-xl text-sm tracking-wider uppercase transition-all hover:bg-[#1da851] hover:shadow-lg hover:shadow-green-500/20 hover:-translate-y-0.5">
+          <iconify-icon icon="mdi:whatsapp" width="22" height="22"></iconify-icon>
+          Contact via WhatsApp
+        </a>
+        <a href="https://maps.google.com/?cid=117612984483289767" target="_blank" rel="noopener"
+           class="inline-flex items-center justify-center gap-3 px-8 py-4 gold-outline-btn font-semibold rounded-xl text-sm tracking-wider uppercase">
+          <iconify-icon icon="lucide:map-pin" width="20" height="20"></iconify-icon>
+          Visit Our Studio
+        </a>
+      </div>
+
+      <!-- Studio hint -->
+      <p class="text-white/30 text-xs mt-8 tracking-wide">
+        <iconify-icon icon="lucide:clock" width="14" height="14" class="inline-block mr-1 align-text-bottom"></iconify-icon>
+        Available by appointment — We recommend reaching out via WhatsApp for the fastest response
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="bg-luxury-charcoal py-10 text-center">
+    <div class="max-w-7xl mx-auto px-6">
+      <p class="font-playfair text-lg text-gold-600 mb-2">Ammar Photography <span class="text-gold-700">&</span> Films</p>
+      <p class="text-white/30 text-xs tracking-wider uppercase mb-6">Royal Wedding Photography & Cinematic Films</p>
+      <div class="flex items-center justify-center gap-4 mb-6">
+        <a href="https://wa.me/923066803289" target="_blank" rel="noopener" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-green-500 hover:border-green-500/50 transition-all" aria-label="WhatsApp">
+          <iconify-icon icon="mdi:whatsapp" width="18" height="18"></iconify-icon>
+        </a>
+        <a href="tel:03066803289" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-gold-500 hover:border-gold-500/50 transition-all" aria-label="Phone">
+          <iconify-icon icon="lucide:phone" width="16" height="16"></iconify-icon>
+        </a>
+        <a href="https://maps.google.com/?cid=117612984483289767" target="_blank" rel="noopener" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-gold-500 hover:border-gold-500/50 transition-all" aria-label="Location">
+          <iconify-icon icon="lucide:map-pin" width="16" height="16"></iconify-icon>
+        </a>
+      </div>
+      <div class="w-12 h-px bg-white/10 mx-auto mb-4"></div>
+      <p class="text-white/20 text-xs">&copy; <span id="footerYear"></span> Ammar Photography & Films. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ============ FLOATING ACTION BUTTONS ============ -->
+  <div class="fixed bottom-6 right-5 z-50 flex flex-col gap-3">
+    <a href="tel:03066803289" aria-label="Direct Call"
+       class="float-btn w-14 h-14 rounded-full bg-gold-500 text-luxury-dark flex items-center justify-center">
+      <iconify-icon icon="lucide:phone" width="22" height="22"></iconify-icon>
+    </a>
+    <a href="https://wa.me/923066803289" target="_blank" rel="noopener" aria-label="WhatsApp"
+       class="float-btn w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center">
+      <iconify-icon icon="mdi:whatsapp" width="26" height="26"></iconify-icon>
+    </a>
+  </div>
+
+  <!-- ============ LIGHTBOX ============ -->
+  <div id="lightbox" class="fixed inset-0 z-[90] hidden" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <div class="lightbox-overlay absolute inset-0 bg-black/90" onclick="closeLightbox()"></div>
+    <button onclick="closeLightbox()" class="absolute top-5 right-5 z-10 w-12 h-12 rounded-full bg-white/10 text-white hover:bg-white/20 flex items-center justify-center transition-all" aria-label="Close">
+      <iconify-icon icon="lucide:x" width="24" height="24"></iconify-icon>
+    </button>
+    <button onclick="prevImage()" class="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 text-white hover:bg-white/20 flex items-center justify-center transition-all" aria-label="Previous image">
+      <iconify-icon icon="lucide:chevron-left" width="28" height="28"></iconify-icon>
+    </button>
+    <button onclick="nextImage()" class="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 text-white hover:bg-white/20 flex items-center justify-center transition-all" aria-label="Next image">
+      <iconify-icon icon="lucide:chevron-right" width="28" height="28"></iconify-icon>
+    </button>
+    <div class="relative z-10 flex items-center justify-center h-full p-16 md:p-20">
+      <img id="lightboxImg" src="" alt="Gallery full view" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl transition-opacity duration-300">
+    </div>
+    <div id="lightboxCaption" class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 text-white/70 text-sm font-playfair italic max-w-md text-center"></div>
+  </div>
+
+  <!-- ============ JAVASCRIPT ============ -->
+  <script>
+    // ---- Data State ----
+    let galleryImages = [];
+    let currentImageIndex = 0;
+
+    // ---- Fallback Data ----
+    const fallbackHero = {
+      title: 'Ammar photography<br><span class="text-gold-500">&</span> Films',
+      subtitle: 'Capturing Royal Moments & Timeless Marriages',
+      bgImage: 'b.png'
+    };
+    const fallbackAbout = {
+      ownerImage: 'owner.png',
+      heading: 'Meet The Artist Behind The Lens',
+      description: 'With over a decade of mastery in the art of wedding photography and cinematography, the creative force behind Ammar Photography & Films has established an unrivaled legacy of excellence. Known for capturing the grandeur, emotion, and sacred beauty of royal weddings, every frame is a masterpiece — meticulously composed, elegantly lit, and timeless in its appeal. Our philosophy is rooted in discretion, artistry, and an unwavering commitment to preserving your most treasured moments with absolute perfection.',
+      tagline: '"Where Every Frame Tells a Royal Story"',
+      highlights: [
+        '15+ Years of Elite Experience',
+        'Cinematic 4K Wedding Films',
+        'Discreet & Professional Coverage',
+        'Trusted by Royal Families'
+      ]
+    };
+    const fallbackGallery = [
+      { image: 'https://picsum.photos/seed/royalwed1/800/1000', caption: 'Royal Baraat Ceremony' },
+      { image: 'https://picsum.photos/seed/royalwed2/800/1000', caption: 'Bridal Portraiture' },
+      { image: 'https://picsum.photos/seed/royalwed3/800/600', caption: 'Grand Wedding Stage' },
+      { image: 'https://picsum.photos/seed/royalwed4/800/1000', caption: 'The Sacred Vows' },
+      { image: 'https://picsum.photos/seed/royalwed5/800/600', caption: 'Elegant Decor Details' },
+      { image: 'https://picsum.photos/seed/royalwed6/800/1000', caption: 'Couple Portrait' },
+      { image: 'https://picsum.photos/seed/royalwed7/800/600', caption: 'Walima Celebration' },
+      { image: 'https://picsum.photos/seed/royalwed8/800/1000', caption: 'Cinematic Moment' },
+    ];
+
+    // ---- Fetch CMS Data ----
+    async function loadContent() {
+      try {
+        const [heroRes, aboutRes, galleryRes] = await Promise.all([
+          fetch('/data/hero.json'),
+          fetch('/data/about.json'),
+          fetch('/data/gallery.json')
+        ]);
+        const heroData = await heroRes.json();
+        const aboutData = await aboutRes.json();
+        const galleryData = await galleryRes.json();
+
+        applyHero(heroData);
+        applyAbout(aboutData);
+        if (galleryData.images && galleryData.images.length > 0) {
+          renderGallery(galleryData.images);
+        } else {
+          renderGallery(fallbackGallery);
+        }
+      } catch (e) {
+        console.log('CMS data not found, using defaults:', e.message);
+        applyHero(fallbackHero);
+        applyAbout(fallbackAbout);
+        renderGallery(fallbackGallery);
+      }
+    }
+
+    function applyHero(data) {
+      if (data.bgImage) {
+        document.getElementById('heroBg').style.backgroundImage = `url('${data.bgImage}')`;
+      }
+      if (data.title) document.getElementById('heroTitle').innerHTML = data.title;
+      if (data.subtitle) document.getElementById('heroSubtitle').textContent = data.subtitle;
+    }
+
+    function applyAbout(data) {
+      if (data.ownerImage) {
+        const img = document.getElementById('ownerImage');
+        img.src = data.ownerImage;
+      }
+      if (data.heading) document.getElementById('aboutHeading').textContent = data.heading;
+      if (data.description) document.getElementById('aboutDescription').textContent = data.description;
+      if (data.tagline) document.getElementById('aboutTagline').innerHTML = data.tagline;
+      if (data.highlights && data.highlights.length) {
+        const icons = ['lucide:crown', 'lucide:film', 'lucide:shield-check', 'lucide:heart-handshake'];
+        const container = document.getElementById('aboutHighlights');
+        container.innerHTML = data.highlights.map((h, i) => `
+          <div class="flex items-center gap-3">
+            <iconify-icon icon="${icons[i % icons.length]}" width="18" height="18" class="text-gold-600 flex-shrink-0"></iconify-icon>
+            <span class="text-sm text-luxury-charcoal/70">${h}</span>
+          </div>
+        `).join('');
+      }
+    }
+
+    function renderGallery(images) {
+      galleryImages = images;
+      const grid = document.getElementById('galleryGrid');
+      const empty = document.getElementById('galleryEmpty');
+
+      if (!images || images.length === 0) {
+        grid.classList.add('hidden');
+        empty.classList.remove('hidden');
+        return;
+      }
+
+      grid.classList.remove('hidden');
+      empty.classList.add('hidden');
+
+      grid.innerHTML = images.map((img, i) => `
+        <div class="gallery-item fade-up" onclick="openLightbox(${i})" style="transition-delay: ${Math.min(i * 0.05, 0.4)}s;" role="button" tabindex="0" aria-label="View ${img.caption || 'gallery image'}"
+             onkeydown="if(event.key==='Enter')openLightbox(${i})">
+          <div class="aspect-[3/4] overflow-hidden rounded-xl">
+            <img src="${img.image}" alt="${img.caption || 'Wedding photograph'}" loading="lazy"
+                 class="w-full h-full object-cover"
+                 onerror="this.src='https://picsum.photos/seed/fallback${i}/600/800'">
+          </div>
+          ${img.caption ? `<p class="text-xs text-gold-700 mt-2 font-playfair italic text-center px-1 truncate">${img.caption}</p>` : ''}
+        </div>
+      `).join('');
+
+      observeElements();
+    }
+
+    // ---- Lightbox ----
+    function openLightbox(index) {
+      currentImageIndex = index;
+      const lb = document.getElementById('lightbox');
+      const img = document.getElementById('lightboxImg');
+      const cap = document.getElementById('lightboxCaption');
+      img.style.opacity = '0';
+      img.src = galleryImages[index].image;
+      cap.textContent = galleryImages[index].caption || '';
+      lb.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      requestAnimationFrame(() => { img.style.opacity = '1'; });
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function nextImage() {
+      currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+      updateLightboxImage();
+    }
+
+    function prevImage() {
+      currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+      updateLightboxImage();
+    }
+
+    function updateLightboxImage() {
+      const img = document.getElementById('lightboxImg');
+      const cap = document.getElementById('lightboxCaption');
+      img.style.opacity = '0';
+      setTimeout(() => {
+        img.src = galleryImages[currentImageIndex].image;
+        cap.textContent = galleryImages[currentImageIndex].caption || '';
+        img.style.opacity = '1';
+      }, 200);
+    }
+
+    // Keyboard navigation for lightbox
+    document.addEventListener('keydown', (e) => {
+      if (document.getElementById('lightbox').classList.contains('hidden')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') nextImage();
+      if (e.key === 'ArrowLeft') prevImage();
+    });
+
+    // ---- Navbar Scroll Effect ----
+    const navbar = document.getElementById('navbar');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const brandText = document.querySelector('.navbar-brand-text');
+    const brandIcon = document.querySelector('.navbar-brand-icon');
+    const hamburgerBtn = document.querySelector('.navbar-hamburger');
+
+    function updateNavbar() {
+      const scrolled = window.scrollY > 60;
+      if (scrolled) {
+        navbar.classList.add('bg-white/95', 'shadow-lg', 'backdrop-blur-md');
+        navbar.classList.remove('bg-transparent');
+        navLinks.forEach(l => { l.classList.remove('text-white'); l.classList.add('text-luxury-charcoal'); });
+        if (brandText) { brandText.classList.remove('text-white'); brandText.classList.add('text-luxury-dark'); }
+        if (brandIcon) { brandIcon.style.color = '#D4AF37'; }
+        if (hamburgerBtn) { hamburgerBtn.classList.remove('text-white'); hamburgerBtn.classList.add('text-luxury-dark'); }
+      } else {
+        navbar.classList.remove('bg-white/95', 'shadow-lg', 'backdrop-blur-md');
+        navbar.classList.add('bg-transparent');
+        navLinks.forEach(l => { l.classList.remove('text-luxury-charcoal'); l.classList.add('text-white'); });
+        if (brandText) { brandText.classList.remove('text-luxury-dark'); brandText.classList.add('text-white'); }
+        if (brandIcon) { brandIcon.style.color = '#FFD700'; }
+        if (hamburgerBtn) { hamburgerBtn.classList.remove('text-luxury-dark'); hamburgerBtn.classList.add('text-white'); }
+      }
+      updateActiveLink();
+    }
+
+    function updateActiveLink() {
+      const sections = document.querySelectorAll('section[id]');
+      let current = '';
+      sections.forEach(section => {
+        const top = section.offsetTop - 120;
+        if (window.scrollY >= top) current = section.id;
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active', 'text-gold-600');
+        if (link.dataset.section === current) {
+          link.classList.add('active');
+          if (window.scrollY > 60) link.classList.add('text-gold-600');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateNavbar, { passive: true });
+
+    // ---- Mobile Menu ----
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const iconOpen = document.getElementById('menuIconOpen');
+    const iconClose = document.getElementById('menuIconClose');
+    let menuOpen = false;
+
+    menuToggle.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      if (menuOpen) {
+        mobileMenu.classList.add('open');
+        iconOpen.classList.add('hidden');
+        iconClose.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      } else {
+        closeMobileMenu();
+      }
+    });
+
+    function closeMobileMenu() {
+      menuOpen = false;
+      mobileMenu.classList.remove('open');
+      iconOpen.classList.remove('hidden');
+      iconClose.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    // ---- Intersection Observer for Fade Animations ----
+    function observeElements() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.fade-up:not(.visible)').forEach(el => observer.observe(el));
+    }
+
+    // ---- Footer Year ----
+    document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+    // ---- Preloader ----
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const preloader = document.getElementById('preloader');
+        preloader.style.opacity = '0';
+        setTimeout(() => { preloader.style.display = 'none'; }, 600);
+      }, 2000);
+    });
+
+    // ---- Init ----
+    updateNavbar();
+    observeElements();
+    loadContent();
+  </script>
+</body>
+</html>

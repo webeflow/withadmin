@@ -1,0 +1,90 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+locale: "en"
+
+collections:
+  # ---- Hero Section ----
+  - name: "pages"
+    label: "Website Pages"
+    files:
+      - name: "hero"
+        label: "Hero Section"
+        file: "data/hero.json"
+        fields:
+          - label: "Main Title"
+            name: "title"
+            widget: "string"
+            default: "Ammar photography<br><span class=\"text-gold-500\">&</span> Films"
+            hint: "You may use basic HTML like <br> and <span> for styling."
+          - label: "Subtitle"
+            name: "subtitle"
+            widget: "string"
+            default: "Capturing Royal Moments & Timeless Marriages"
+          - label: "Background Image"
+            name: "bgImage"
+            widget: "image"
+            default: "b.png"
+            hint: "Recommended: high-resolution wedding/royal photograph. Ideal size 1920x1080 or larger."
+            required: false
+
+      # ---- About Section ----
+      - name: "about"
+        label: "About Owner Section"
+        file: "data/about.json"
+        fields:
+          - label: "Owner Photograph"
+            name: "ownerImage"
+            widget: "image"
+            default: "owner.png"
+            hint: "Professional portrait of the photographer."
+            required: false
+          - label: "Section Heading"
+            name: "heading"
+            widget: "string"
+            default: "Meet The Artist Behind The Lens"
+          - label: "Description"
+            name: "description"
+            widget: "text"
+            default: "With over a decade of mastery in the art of wedding photography and cinematography, the creative force behind Ammar Photography & Films has established an unrivaled legacy of excellence. Known for capturing the grandeur, emotion, and sacred beauty of royal weddings, every frame is a masterpiece — meticulously composed, elegantly lit, and timeless in its appeal. Our philosophy is rooted in discretion, artistry, and an unwavering commitment to preserving your most treasured moments with absolute perfection."
+          - label: "Tagline"
+            name: "tagline"
+            widget: "string"
+            default: "\"Where Every Frame Tells a Royal Story\""
+            hint: "An inspiring italic quote shown below the description."
+          - label: "Highlights"
+            name: "highlights"
+            widget: "list"
+            fields:
+              - label: "Highlight Text"
+                name: "highlight"
+                widget: "string"
+            default:
+              - "15+ Years of Elite Experience"
+              - "Cinematic 4K Wedding Films"
+              - "Discreet & Professional Coverage"
+              - "Trusted by Royal Families"
+
+      # ---- Gallery Section ----
+      - name: "gallery"
+        label: "Gallery Images"
+        file: "data/gallery.json"
+        fields:
+          - label: "Gallery Images"
+            name: "images"
+            widget: "list"
+            hint: "Add or remove wedding photographs. They will appear in the gallery grid."
+            fields:
+              - label: "Image"
+                name: "image"
+                widget: "image"
+                hint: "Upload a wedding photograph."
+              - label: "Caption"
+                name: "caption"
+                widget: "string"
+                required: false
+                hint: "Optional short description shown below the image."
